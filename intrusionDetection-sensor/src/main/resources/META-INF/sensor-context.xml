@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:axon="http://www.axonframework.org/schema/core"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.axonframework.org/schema/core http://www.axonframework.org/schema/axon-core.xsd">
+
+	<axon:saga-manager id="sagaManager" event-bus="eventBus" resource-injector="resourceInjector" saga-repository="sagaRepository">
+		<axon:types>com.github.frajimiba.intrusionDetection.detectionPoint.SensorTransactionManager</axon:types>
+	</axon:saga-manager>
+	
+	<axon:event-sourcing-repository id="sensorRepository"
+		aggregate-type="com.github.frajimiba.intrusionDetection.detectionPoint.Sensor"
+		event-bus="eventBus" event-store="eventStore">
+		<!--  axon:snapshotter-trigger event-count-threshold="50" snapshotter-ref="snapshotter"/ -->
+	</axon:event-sourcing-repository>
+	
+</beans>
